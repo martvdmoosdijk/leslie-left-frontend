@@ -1,28 +1,12 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "leslie-left-frontend",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "dependencies": {
-    "gatsby": "^2.6.0",
-    "gatsby-image": "^2.1.0",
-    "gatsby-plugin-manifest": "^2.1.1",
-    "gatsby-plugin-offline": "^2.1.1",
-    "gatsby-plugin-react-helmet": "^3.0.12",
-    "gatsby-plugin-sharp": "^2.0.37",
-    "gatsby-source-filesystem": "^2.0.37",
-    "gatsby-transformer-sharp": "^2.1.19",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.1"
-  },
-  "devDependencies": {
-    "prettier": "^1.17.1"
-  },
+  "description": "The main website for the band called Leslie Left",
+  "version": "1.0.0",
+  "author": "Mart van de Moosdijk martvandemoosdijk@gmail.com>",
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "leslie-left"
   ],
   "license": "MIT",
   "scripts": {
@@ -33,11 +17,25 @@
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  "dependencies": {
+    "gatsby": "2.6.0",
+    "gatsby-image": "2.1.0",
+    "gatsby-plugin-manifest": "2.1.1",
+    "gatsby-plugin-offline": "2.1.1",
+    "gatsby-plugin-react-helmet": "3.0.12",
+    "gatsby-plugin-sharp": "2.0.37",
+    "gatsby-source-filesystem": "2.0.37",
+    "gatsby-transformer-sharp": "2.1.19",
+    "prop-types": "15.7.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-helmet": "5.2.1"
   },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  "devDependencies": {
+    "eslint": "5.3.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.0"
   }
 }
