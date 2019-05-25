@@ -7,7 +7,6 @@ import TWEEN from '@tweenjs/tween.js';
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: orangered;
   overflow: hidden;
 `;
 
@@ -16,7 +15,6 @@ class Logo extends Component {
     super(props);
 
     this.container = React.createRef();
-    this.zoomMultiplier = 800;
   }
 
   componentDidMount() {
@@ -86,10 +84,7 @@ class Logo extends Component {
         cube.scale.y = 0.01;
         // cube.scale.y = 1;
 
-        cubes[x][z] = {
-          el: cube,
-          speedPerFrame: 1 / 60,
-        };
+        cubes[x][z] = { el: cube };
       }
     }
 
@@ -115,8 +110,8 @@ class Logo extends Component {
     const width = this.container.current.offsetWidth;
     const height = this.container.current.offsetHeight;
 
-    this.camera.zoom = Math.min(width, height) / this.zoomMultiplier;
     this.camera.aspect = width / height;
+    this.camera.zoom = this.camera.aspect + 0.1;
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(width, height);
