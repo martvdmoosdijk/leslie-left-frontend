@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import * as THREE from 'three';
-import { MeshLine, MeshLineMaterial } from 'three.meshline';
 import OrbitControls from 'three-orbitcontrols';
 
 const Container = styled.div`
@@ -16,10 +15,12 @@ class Logo extends Component {
     super(props);
 
     this.container = React.createRef();
+    this.zoomMultiplier = 800;
   }
 
   componentDidMount() {
     this.setupScene(this.container.current);
+    this.updateSceneSize();
     this.animateScene();
 
     window.addEventListener('resize', this.updateSceneSize.bind(this));
@@ -29,6 +30,23 @@ class Logo extends Component {
     window.removeEventListener('resize', this.updateSceneSize.bind(this));
   }
 
+  setupAttributes(geometry) {
+    const vectors = [
+      new THREE.Vector3(1, 0, 0),
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(0, 0, 1),
+    ];
+
+    const { position } = geometry.attributes;
+    const centers = new Float32Array(position.count * 3);
+
+    for (let i = 0, l = position.count; i < l; i++) {
+      vectors[i % 3].toArray(centers, i * 3);
+    }
+
+    geometry.addAttribute('center', new THREE.BufferAttribute(centers, 3));
+  }
+
   setupScene(container) {
     const width = container.offsetWidth;
     const height = container.offsetHeight;
@@ -36,7 +54,7 @@ class Logo extends Component {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xFFFF00);
 
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 30);
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
     camera.position.x = 7;
     camera.position.y = 13;
     camera.position.z = 14;
@@ -75,10 +93,8 @@ class Logo extends Component {
 
         cube.position.x = x;
         cube.position.z = z;
-        // cube.scale.y = 0.5;
-        // cube.scale.y = 1;
-
-        // TODO: Create Wireframe
+        // cube.scale.y = 0.01;
+        cube.scale.y = 1;
 
         cubes[x][z] = cube;
       }
@@ -90,12 +106,14 @@ class Logo extends Component {
     this.camera = camera;
     this.renderer = renderer;
     this.controls = controls;
+    this.initialWidth = width;
   }
 
   updateSceneSize() {
     const width = this.container.current.offsetWidth;
     const height = this.container.current.offsetHeight;
 
+    this.camera.zoom = Math.min(width, height) / this.zoomMultiplier;
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
 
@@ -110,8 +128,7 @@ class Logo extends Component {
     // requestAnimationFrame(this.animateScene.bind(this));
     // this.controls.update();
     // this.renderer.render(this.scene, this.camera);
-
-    // console.log('New pos: ', this.camera.position);
+    // console.log(this.camera.position);
   }
 
   render() {
