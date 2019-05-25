@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 // import { Link } from 'gatsby';
 
@@ -21,6 +21,7 @@ const ContainerWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 0;
   
   width: 90%;
   height: 100%;
@@ -97,25 +98,39 @@ const Link = styled.a`
   margin-bottom: 4px;
 `;
 
-const IndexPage = () => (
-  <Layout showHeader={false} showFooter={false}>
-    <SEO title="Home" />
+class IndexPage extends Component {
+  constructor(props) {
+    super(props);
 
-    <Container>
-      <ContainerWrapper>
-        <Logo />
-        <TextContainer>
-          <Title>Leslie Left</Title>
-          <SubTitle>Running from the red room</SubTitle>
-          <Links>
-            <Link href="http://google.com">Music</Link>
-            <Link href="http://google.com">Tour</Link>
-            <Link href="http://google.com">News</Link>
-          </Links>
-        </TextContainer>
-      </ContainerWrapper>
-    </Container>
-  </Layout>
-);
+    this.container = React.createRef();
+  }
+
+  componentDidMount() {
+    this.container.current.style.opacity = 1;
+  }
+
+  render() {
+    return (
+      <Layout showHeader={false} showFooter={false}>
+        <SEO title="Home" />
+
+        <Container>
+          <ContainerWrapper ref={this.container}>
+            <Logo />
+            <TextContainer>
+              <Title>Leslie Left</Title>
+              <SubTitle>Running from the red room</SubTitle>
+              <Links>
+                <Link href="http://google.com">Music</Link>
+                <Link href="http://google.com">Tour</Link>
+                <Link href="http://google.com">News</Link>
+              </Links>
+            </TextContainer>
+          </ContainerWrapper>
+        </Container>
+      </Layout>
+    );
+  }
+}
 
 export default IndexPage;
