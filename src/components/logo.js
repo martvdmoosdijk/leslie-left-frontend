@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
+import TWEEN from '@tweenjs/tween.js';
 
 const Container = styled.div`
   width: 100%;
@@ -21,30 +22,19 @@ class Logo extends Component {
   componentDidMount() {
     this.setupScene(this.container.current);
     this.updateSceneSize();
-    this.animateScene();
+    this.sceneFramePassed();
+
+    Object.keys(this.cubes).forEach((x) => {
+      Object.keys(this.cubes[x]).forEach((z) => {
+        this.scaleCube(this.cubes[x][z].el, 2000 + Math.random() * 1000);
+      });
+    });
 
     window.addEventListener('resize', this.updateSceneSize.bind(this));
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateSceneSize.bind(this));
-  }
-
-  setupAttributes(geometry) {
-    const vectors = [
-      new THREE.Vector3(1, 0, 0),
-      new THREE.Vector3(0, 1, 0),
-      new THREE.Vector3(0, 0, 1),
-    ];
-
-    const { position } = geometry.attributes;
-    const centers = new Float32Array(position.count * 3);
-
-    for (let i = 0, l = position.count; i < l; i++) {
-      vectors[i % 3].toArray(centers, i * 3);
-    }
-
-    geometry.addAttribute('center', new THREE.BufferAttribute(centers, 3));
   }
 
   setupScene(container) {
@@ -93,20 +83,32 @@ class Logo extends Component {
 
         cube.position.x = x;
         cube.position.z = z;
-        // cube.scale.y = 0.01;
-        cube.scale.y = 1;
+        cube.scale.y = 0.01;
+        // cube.scale.y = 1;
 
-        cubes[x][z] = cube;
+        cubes[x][z] = {
+          el: cube,
+          speedPerFrame: 1 / 60,
+        };
       }
     }
 
-    renderer.render(scene, camera);
-
+    this.cubes = cubes;
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
     this.controls = controls;
     this.initialWidth = width;
+
+    this.renderScene();
+  }
+
+  scaleCube(cube, time) {
+    new TWEEN.Tween(cube.scale)
+      .to({ y: 1 }, time)
+      .easing(TWEEN.Easing.Elastic.Out)
+      // .onUpdate(this.renderScene)
+      .start();
   }
 
   updateSceneSize() {
@@ -122,13 +124,16 @@ class Logo extends Component {
     this.renderer.setPixelRatio(window.devicePixelRatio);
   }
 
-  animateScene() {
-    // TODO: Only animate when neccesary
+  sceneFramePassed() {
+    // TODO: Only calll this function when atually needed
+    requestAnimationFrame(this.sceneFramePassed.bind(this));
+    this.controls.update();
+    TWEEN.update();
+    this.renderScene();
+  }
 
-    // requestAnimationFrame(this.animateScene.bind(this));
-    // this.controls.update();
-    // this.renderer.render(this.scene, this.camera);
-    // console.log(this.camera.position);
+  renderScene() {
+    this.renderer.render(this.scene, this.camera);
   }
 
   render() {
