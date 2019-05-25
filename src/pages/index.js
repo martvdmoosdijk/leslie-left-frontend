@@ -19,11 +19,11 @@ const Container = styled.div`
   background-color: yellow;
 `;
 
-const TextContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
+// const TextContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+// `;
 
 const IndexPage = () => (
   <Layout showHeader={false} showFooter={false}>
@@ -31,9 +31,9 @@ const IndexPage = () => (
 
     <Container>
       <Logo />
-      <TextContainer>
+      {/* <TextContainer>
         <h1>Leslie Left</h1>
-      </TextContainer>
+      </TextContainer> */}
     </Container>
   </Layout>
 );
