@@ -84,6 +84,11 @@ class Logo extends Component {
         cube.scale.y = 0.01;
         // cube.scale.y = 1;
 
+        // Create edges
+        // const edgesGeometry = new THREE.EdgesGeometry(cube.geometry);
+        // const edgesLines = new THREE.LineSegments(edgesGeometry, new THREE.LineBasicMaterial({ color: 0x000000 }));
+        // cube.add(edgesLines);
+
         cubes[x][z] = { el: cube };
       }
     }
@@ -120,7 +125,7 @@ class Logo extends Component {
   }
 
   sceneFramePassed() {
-    // TODO: Only calll this function when atually needed
+    // TODO: Only call this function when atually needed
     requestAnimationFrame(this.sceneFramePassed.bind(this));
     this.controls.update();
     TWEEN.update();

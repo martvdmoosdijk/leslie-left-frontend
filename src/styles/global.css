@@ -6,6 +6,10 @@ html, body {
   font-size: 18px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html, body, #___gatsby, div[role="group"][tabindex] {
   width: 100%;
   height: 100%;
