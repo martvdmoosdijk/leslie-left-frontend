@@ -3,6 +3,7 @@ html, body {
   padding: 0;
 
   font-family: 'Roboto', sans-serif;
+  font-size: 18px;
 }
 
 html, body, #___gatsby, div[role="group"][tabindex] {
@@ -10,11 +11,27 @@ html, body, #___gatsby, div[role="group"][tabindex] {
   height: 100%;
 }
 
-html, body, h1, h2, h3, h4, h5 {
+html, body, p, h1, h2, h3, h4, h5 {
   margin: 0;
   padding: 0;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: 'Righteous', cursive;
+}
+
+h1.title {
+  font-size: 52px;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 18px;
 }

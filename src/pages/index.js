@@ -1,101 +1,53 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-// import { Link } from 'gatsby';
 
-import Layout from '../components/layout/layout';
+import { YELLOW } from '../styles/variables';
+import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Logo from '../components/logo';
-// import Image from '../components/image';
 
-const TABLET = 'min-width: 540px';
-const LAPTOP = 'min-width: 1024px';
+const StyledLayout = styled(Layout)`
+  background-color: ${YELLOW};
+`;
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: yellow;
-`;
+  position: relative;
 
-const ContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  
-  width: 90%;
-  height: 100%;
-  margin: auto;
-  
-  @media (${TABLET}) {
-    flex-direction: row;
-  }
+  // padding-bottom: 20%;
+`;
+
+const Hamburger = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  cursor: pointer;
+`;
+
+const LogoContainer = styled.div`
+  width: 100%;  
+  height: 45%;
 `;
 
 const TextContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 55%;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
-  margin-top: 0;
-  
-  @media (${TABLET}) {
-    margin-top: -10%;
-    align-items: flex-start;
-    justify-content: center;
-  }
-
-  @media(${LAPTOP}) {
-    width: 90%;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 14vw;
-
-  @media (${TABLET}) {
-    font-size: 9vw;
-  }
-
-  @media(${LAPTOP}) {
-    font-size: 90px;
-  }
-`;
-
-const SubTitle = styled.h2`
-  font-size: 6vw;
-
-  @media (${TABLET}) {
-    font-size: 2vw;
-  }
-
-  @media(${LAPTOP}) {
-    font-size: 21px;
-  }
-`;
-
-const Links = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  
-  margin-top: 25px;
-  font-size: 7vw;
-  width: 100%;
-  
-  @media (${TABLET}) {
-    margin-top: 50px;
-    font-size: 32px;
-  }
 
-`;
-
-const Link = styled.a`
-  text-decoration: underline;
-  color: black;
-  margin-bottom: 4px;
+  // justify-content: center;
+  // align-items: flex-start;
 `;
 
 class IndexPage extends Component {
@@ -111,24 +63,22 @@ class IndexPage extends Component {
 
   render() {
     return (
-      <Layout showHeader={false} showFooter={false}>
+      <StyledLayout>
         <SEO title="Home" />
 
-        <Container>
-          <ContainerWrapper ref={this.container}>
+        <Container ref={this.container}>
+          {/* <Hamburger /> */}
+
+          <LogoContainer>
             <Logo />
-            <TextContainer>
-              <Title>Leslie Left</Title>
-              <SubTitle>Running from the red room</SubTitle>
-              <Links>
-                <Link href="http://google.com">Music</Link>
-                <Link href="http://google.com">Tour</Link>
-                <Link href="http://google.com">News</Link>
-              </Links>
-            </TextContainer>
-          </ContainerWrapper>
+          </LogoContainer>
+
+          <TextContainer>
+            <h1 className="title">Leslie Left</h1>
+            <h3>Yellow yellow, pink pink</h3>
+          </TextContainer>
         </Container>
-      </Layout>
+      </StyledLayout>
     );
   }
 }
