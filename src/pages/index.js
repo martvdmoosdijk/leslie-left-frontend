@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { YELLOW, MQ_TABLET } from '../styles/variables';
+import { YELLOW, MQ_TABLET, MQ_LAPTOP } from '../styles/variables';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Logo from '../components/logo';
@@ -22,9 +22,19 @@ const Container = styled.div`
   justify-items: center;
   align-items: center;
 
-  @media (max-device-width: ${MQ_TABLET}px) and (orientation: landscape) {
+  max-width: 520px;
+  margin: auto;
+
+  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto 1fr;
+    max-width: inherit;
+  }
+
+  @media (min-width: ${MQ_LAPTOP}px) {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr auto 1fr 1fr;
+    max-width: inherit;
   }
 `;
 
@@ -42,8 +52,12 @@ const LogoContainer = styled.div`
   width: 100%;  
   height: 100%;
 
-  @media (max-device-width: ${MQ_TABLET}px) and (orientation: landscape) {
+  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
     grid-row: 1 / span 2;
+  }
+
+  @media (min-width: ${MQ_LAPTOP}px) {
+    grid-row: 1 / span 4;
   }
 `;
 
@@ -55,6 +69,20 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
+    grid-row-start: 1;
+  }
+
+  @media (min-width: ${MQ_LAPTOP}px) {
+    grid-row-start: 2;
+    // justify-self: flex-start;
+    // max-width: 400px;
+  }
+`;
+
+const Title = styled.h1`
+  text-align: center;
 `;
 
 const PlayerContainer = styled.div`
@@ -66,8 +94,14 @@ const PlayerContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-device-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-column-start: 2;
+  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
+    grid-row-start: 2;
+  }
+
+  @media (min-width: ${MQ_LAPTOP}px) {
+    grid-row-start: 3;
+    // justify-self: flex-start;
+    // max-width: 400px;
   }
 `;
 
@@ -95,7 +129,7 @@ class IndexPage extends Component {
           </LogoContainer>
 
           <TextContainer>
-            <h1 className="title">Leslie Left</h1>
+            <Title className="title">Leslie Left</Title>
             <h3>Yellow yellow, pink pink</h3>
           </TextContainer>
 

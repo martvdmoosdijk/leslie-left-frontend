@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { PINK } from '../styles/variables';
+import { PINK, MQ_LAPTOP } from '../styles/variables';
 
 const Container = styled.div`
   width: 100%;
@@ -11,6 +11,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  // @media (min-width: ${MQ_LAPTOP}px) {
+  //   max-width: 500px;
+  // }
 `;
 
 const Tracks = styled.div`
@@ -64,10 +68,28 @@ class Player extends Component {
     };
 
     this.togglePlayPause = this.togglePlayPause.bind(this);
+    this.audio = undefined;
   }
 
   togglePlayPause() {
     const { isPlaying } = this.state;
+
+    if (isPlaying) {
+      this.audio.pause();
+    } else {
+      this.audio = new Audio('https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3');
+      this.audio.play();
+
+      this.audio.addEventListener('loadeddata', () => {
+        console.log(this.audio.duration);
+      });
+
+      // https://stackoverflow.com/questions/17506685/playlist-with-audio-javascript
+
+      // this.audio = new Audio('static/music/test.m4a');
+      // this.audio.play();
+    }
+
     this.setState({ isPlaying: !isPlaying, showSeekBar: true });
   }
 
