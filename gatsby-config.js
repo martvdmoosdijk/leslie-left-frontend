@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Leslie Left',
-    description: 'Leslie left - EP YELLOW YELLOW, PINK PINK - Out now!',
+    description: 'EP YELLOW YELLOW, PINK PINK - Out now!',
     author: 'Leslie Left',
   },
   plugins: [
@@ -46,19 +46,5 @@ module.exports = {
     // transformer-sharp and plugin-sharp are used to transform image files into optimized versions
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-
-    // plugin-manifest creates web manifest for progressive Web App
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'Leslie left - EP YELLOW YELLOW, PINK PINK - Out now!',
-        short_name: 'Leslie Left',
-        start_url: '/',
-        background_color: '#FFFF00',
-        theme_color: '#FF1493',
-        display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
-      },
-    },
   ],
 };
