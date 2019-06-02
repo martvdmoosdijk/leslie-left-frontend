@@ -126,10 +126,10 @@ class Logo extends Component {
 
   sceneFramePassed() {
     // TODO: Only call this function when atually needed
-    // requestAnimationFrame(this.sceneFramePassed.bind(this));
-    // this.controls.update();
-    // TWEEN.update();
-    // this.renderScene();
+    requestAnimationFrame(this.sceneFramePassed.bind(this));
+    this.controls.update();
+    TWEEN.update();
+    this.renderScene();
   }
 
   renderScene() {

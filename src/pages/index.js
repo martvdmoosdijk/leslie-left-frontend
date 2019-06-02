@@ -6,6 +6,7 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Logo from '../components/logo';
 import Player from '../components/player';
+import PromoVideo from '../components/promo-video';
 
 const StyledLayout = styled(Layout)`
   background-color: ${YELLOW};
@@ -24,6 +25,7 @@ const Container = styled.div`
   opacity: 0;
 
   max-width: 520px;
+  max-height: 800px;
   margin: auto;
 
   @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
@@ -34,9 +36,10 @@ const Container = styled.div`
 
   @media (min-width: ${MQ_LAPTOP}px) {
     grid-template-columns: 50% 50%;
-    grid-template-rows: 1fr auto 1fr 1fr;
+    grid-template-rows: 0.3fr auto 1fr 0.3fr;
     max-width: inherit;
   }
+
 `;
 
 const Hamburger = styled.div`
@@ -98,7 +101,7 @@ const PlayerContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: green;
+  position: relative;
 
   @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
     grid-row-start: 2;
@@ -106,8 +109,6 @@ const PlayerContainer = styled.div`
 
   @media (min-width: ${MQ_LAPTOP}px) {
     grid-row-start: 3;
-    // justify-self: flex-start;
-    // max-width: 400px;
   }
 `;
 
@@ -141,6 +142,7 @@ class IndexPage extends Component {
 
           <PlayerContainer>
             {/* <Player /> */}
+            <PromoVideo embedCode="NpEaa2P7qZI" />
           </PlayerContainer>
         </Container>
       </StyledLayout>
