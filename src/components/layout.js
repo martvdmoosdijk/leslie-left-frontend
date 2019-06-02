@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import '../styles/global.css';
 import Footer from './footer';
+import { MQ_LAPTOP } from '../styles/variables';
 
 const Container = styled.div`
   display: flex;
@@ -27,6 +28,10 @@ const Content = styled.div`
   flex-direction: column;
   height: ${props => (props.fullHeight ? '100%' : 'auto')};
   padding: 20px;
+
+  @media (min-width: ${MQ_LAPTOP}px) {
+    padding: 40px;
+  }
 `;
 
 const Header = styled.header``;

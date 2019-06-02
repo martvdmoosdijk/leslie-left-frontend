@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { YELLOW, MQ_TABLET, MQ_LAPTOP } from '../styles/variables';
+import {
+  YELLOW, PINK, MQ_TABLET, MQ_LAPTOP,
+} from '../styles/variables';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Logo from '../components/logo';
@@ -93,6 +95,15 @@ const Title = styled.h1`
   text-align: center;
 `;
 
+const SubTitle = styled.h3`
+  text-align: center;
+`;
+
+const AlbumLink = styled.a`
+  color: ${PINK};
+  text-decoration: underline;
+`;
+
 const PlayerContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -128,7 +139,7 @@ class IndexPage extends Component {
       <StyledLayout showFooter>
         <SEO title="Home" />
 
-        <Hamburger>Menu placeholder</Hamburger>
+        {/* <Hamburger>Menu placeholder</Hamburger> */}
 
         <Container ref={this.container}>
           <LogoContainer>
@@ -137,7 +148,7 @@ class IndexPage extends Component {
 
           <TextContainer>
             <Title className="title">Leslie Left</Title>
-            <h3>Yellow yellow, pink pink</h3>
+            <SubTitle>Yellow yellow, pink pink - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">OUT NOW!</AlbumLink></SubTitle>
           </TextContainer>
 
           <PlayerContainer>
