@@ -18,9 +18,8 @@ const MaxWidthWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Content = styled.div`
