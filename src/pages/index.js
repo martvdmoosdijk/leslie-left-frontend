@@ -98,6 +98,7 @@ const PlayerContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: green;
 
   @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
     grid-row-start: 2;
@@ -139,7 +140,7 @@ class IndexPage extends Component {
           </TextContainer>
 
           <PlayerContainer>
-            <Player />
+            {/* <Player /> */}
           </PlayerContainer>
         </Container>
       </StyledLayout>

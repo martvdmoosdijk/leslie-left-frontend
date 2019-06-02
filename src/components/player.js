@@ -1,70 +1,98 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-import { PINK, MQ_LAPTOP } from '../styles/variables';
+import { PINK, MQ_LAPTOP, GREY_LIGHT } from '../styles/variables';
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
-  // @media (min-width: ${MQ_LAPTOP}px) {
-  //   max-width: 500px;
-  // }
+  color: white;
 `;
 
-const Tracks = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const Display = styled.div`
+  width: 100%;
+  background-color: black;
+  color: ${PINK};
+  padding: 12px 20px;
+  border-radius: 6px;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-row-gap: 5px;
 `;
 
-const Track = styled.div`
-  padding: 1px 0;
-  font-family: 'Righteous', cursive;
-  font-size: ${props => (props.active ? '130%' : '100%')};
-  font-weight: ${props => (props.active ? 'bold' : 'normal')};
-  color: ${props => (props.active ? PINK : 'inherit')};
-  cursor: pointer;
+const SongTitle = styled.h2`
+  font-weight: normal;
 `;
 
-const Controls = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const PlayPauseIcon = styled.svg`
+  margin-left: 20px;
+  width: 25px;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
 
-  margin-left: 5px;
-  margin-top: 25px;
-  margin-bottom: 18px;
-`;
-
-const Control = styled.svg`
-  margin: 0 10px;
-  cursor: pointer;
-  width: 20px;
+  justify-self: center;
+  align-self: center;
 `;
 
 const SeekBar = styled.div`
-  width: 60%;
-  height: 5px;
-  background-color: red;
-  opacity: ${props => (props.visible ? 1 : 0)};
-  transition: opacity 0.2s;
+  width: 100%;
+      
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ProgressBar = styled.div`
+  background-color: ${PINK};
+  flex-grow: 1;
+  height: 8px;
+`;
+
+const ProgressTime = styled.div`
+  padding-left: 10px;
+  font-size: 70%;
+`;
+
+const Queue = styled.div`
+  width: 95%;
+  background-color: ${GREY_LIGHT};
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  list-style: none;
+  padding: 10px;
+  color: white;
+`;
+
+const Song = styled.div`
+  position: relative;
+  padding: 8px 8px;
+  cursor: pointer;
+  
+  background-color: ${props => (props.active ? 'rgba(60, 60, 60, 0.61)' : 'inherit')};
+  border-radius: ${props => (props.active ? '10px' : '0')};
 `;
 
 class Player extends Component {
   constructor(props) {
     super(props);
 
+    const { songs } = this.props;
+    const activeSong = {
+      ...songs[0],
+      duration: '00:00',
+      timestamp: '00:00',
+    };
+
     this.state = {
-      showSeekBar: false,
       isPlaying: false,
+      activeSong,
     };
 
     this.togglePlayPause = this.togglePlayPause.bind(this);
@@ -81,59 +109,54 @@ class Player extends Component {
       this.audio.play();
 
       this.audio.addEventListener('loadeddata', () => {
-        console.log(this.audio.duration);
+        const duration = this.audio.duration;
+        console.log(duration);
       });
-
-      // https://stackoverflow.com/questions/17506685/playlist-with-audio-javascript
-
-      // this.audio = new Audio('static/music/test.m4a');
-      // this.audio.play();
     }
 
-    this.setState({ isPlaying: !isPlaying, showSeekBar: true });
+    // TODO Set song
+    this.setState({ isPlaying: !isPlaying });
   }
 
   render() {
-    const { isPlaying, showSeekBar } = this.state;
+    const { isPlaying, activeSong } = this.state;
+    const { songs } = this.props;
 
     return (
       <Container>
-        <span>Music player placeholder</span>
-        {/* <Tracks>
-          <Track>Its personal</Track>
-          <Track active>Come on</Track>
-          <Track>I do</Track>
-        </Tracks>
-
-        <Controls>
-          <Control xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path fill="currentColor" d="M64 468V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v176.4l195.5-181C352.1 22.3 384 36.6 384 64v384c0 27.4-31.9 41.7-52.5 24.6L136 292.7V468c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12z" />
-          </Control>
-          { isPlaying && (
-            <Control xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" onClick={this.togglePlayPause}>
-              <path fill="currentColor" d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z" />
-            </Control>
-          )}
-          { !isPlaying && (
-            <Control xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" onClick={this.togglePlayPause}>
-              <path fill="black" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
-            </Control>
-          )}
-          <Control xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path fill="currentColor" d="M384 44v424c0 6.6-5.4 12-12 12h-48c-6.6 0-12-5.4-12-12V291.6l-195.5 181C95.9 489.7 64 475.4 64 448V64c0-27.4 31.9-41.7 52.5-24.6L312 219.3V44c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12z" />
-          </Control>
-        </Controls>
-
-        <SeekBar visible={showSeekBar} /> */}
-
+        <Display>
+          <SongTitle>{ activeSong.title }</SongTitle>
+          <PlayPauseIcon viewBox="0 0 448 512" onClick={this.togglePlayPause}>
+            { isPlaying
+              ? <path fill={PINK} d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z" />
+              : <path fill={PINK} d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+            }
+          </PlayPauseIcon>
+          <SeekBar>
+            <ProgressBar />
+            <ProgressTime>{ activeSong.timestamp } / { activeSong.duration}</ProgressTime>
+          </SeekBar>
+        </Display>
+        <Queue>
+          { songs.map(song => <Song key={song.title} active={song.title === activeSong.title}>{ song.title }</Song>)}
+        </Queue>
       </Container>
     );
   }
 }
 
-// https://fontawesome.com/icons/play?style=solid
-// https://fontawesome.com/icons/pause?style=solid
-// https://fontawesome.com/icons/caret-right?style=solid
-// https://fontawesome.com/icons/caret-left?style=solid
+Player.defaultProps = {
+  songs: [
+    { title: 'Come on' },
+    { title: 'It\'s personal' },
+    { title: 'I do' },
+  ],
+};
+
+Player.propTypes = {
+  songs: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+  })),
+};
 
 export default Player;

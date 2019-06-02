@@ -36,10 +36,12 @@ h1 {
 
 h2 {
   font-size: 24px;
+  font-weight: normal;
 }
 
 h3 {
   font-size: 18px;
+  font-weight: normal;
 }
 
 @media (min-width: 760px) {
