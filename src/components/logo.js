@@ -59,6 +59,7 @@ class Logo extends Component {
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = false;
 
     const cubes = {};
     for (let x = -4; x <= 4; x++) {
