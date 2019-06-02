@@ -25,26 +25,5 @@ module.exports = {
         ],
       },
     },
-    // {
-    //   resolve: 'gatsby-plugin-web-font-loader',
-    //   options: {
-    //     google: {
-    //       families: ['Righteous', 'Roboto'],
-    //     },
-    //   },
-    // },
-
-    // source-filesystem is used to load files into graphql queries
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'images',
-        path: `${__dirname}/src/images`,
-      },
-    },
-
-    // transformer-sharp and plugin-sharp are used to transform image files into optimized versions
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
   ],
 };
