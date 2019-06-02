@@ -38,15 +38,15 @@ const Container = styled.div`
   }
 `;
 
-// const Hamburger = styled.div`
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   width: 40px;
-//   height: 40px;
-//   background-color: black;
-//   cursor: pointer;
-// `;
+const Hamburger = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  // width: 40px;
+  height: 40px;
+  // background-color: black;
+  cursor: pointer;
+`;
 
 const LogoContainer = styled.div`
   width: 100%;  
@@ -121,7 +121,7 @@ class IndexPage extends Component {
         <SEO title="Home" />
 
         <Container ref={this.container}>
-          {/* <Hamburger /> */}
+          <Hamburger>Menu placeholder</Hamburger>
 
           <LogoContainer>
             <Logo />
