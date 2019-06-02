@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 
 import '../styles/global.css';
+import Footer from './footer';
 
 const Container = styled.div`
   display: flex;
@@ -16,6 +17,10 @@ const MaxWidthWrapper = styled.div`
   height: 100%;
   width: 100%;
   margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
 `;
 
 const Content = styled.div`
@@ -26,7 +31,6 @@ const Content = styled.div`
 `;
 
 const Header = styled.header``;
-const Footer = styled.footer``;
 
 const Layout = ({
   className,
@@ -49,17 +53,17 @@ const Layout = ({
   return (
     <Container className={className} fullHeight={fullHeight}>
       <MaxWidthWrapper maxWidth={maxWidth}>
-        { showHeader && (
+        { showHeader ? (
           <Header>Header | {siteMetadata.title}</Header>
-        ) }
+        ) : <div /> }
 
         <Content fullHeight={fullHeight}>
           {children}
         </Content>
 
-        { showFooter && (
-          <Footer>Footer</Footer>
-        ) }
+        { showFooter ? (
+          <Footer />
+        ) : <div /> }
       </MaxWidthWrapper>
     </Container>
   );

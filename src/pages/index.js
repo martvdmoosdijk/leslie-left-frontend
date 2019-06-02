@@ -124,7 +124,7 @@ class IndexPage extends Component {
 
   render() {
     return (
-      <StyledLayout>
+      <StyledLayout showFooter>
         <SEO title="Home" />
 
         <Hamburger>Menu placeholder</Hamburger>
