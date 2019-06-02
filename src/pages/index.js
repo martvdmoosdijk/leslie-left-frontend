@@ -21,6 +21,7 @@ const Container = styled.div`
   grid-template-rows: 40% auto 1fr;
   justify-items: center;
   align-items: center;
+  opacity: 0;
 
   max-width: 520px;
   margin: auto;
@@ -42,10 +43,15 @@ const Hamburger = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  // width: 40px;
   height: 40px;
-  // background-color: black;
   cursor: pointer;
+  padding: inherit;
+  z-index: 2;
+
+  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
+    left: 0;
+    right: auto;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -120,9 +126,9 @@ class IndexPage extends Component {
       <StyledLayout>
         <SEO title="Home" />
 
-        <Container ref={this.container}>
-          <Hamburger>Menu placeholder</Hamburger>
+        <Hamburger>Menu placeholder</Hamburger>
 
+        <Container ref={this.container}>
           <LogoContainer>
             <Logo />
           </LogoContainer>
