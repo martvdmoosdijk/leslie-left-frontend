@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Leslie Left',
-    description: 'Leslie left - EP RUNNING FROM THE RED ROOM - Out now!',
+    description: 'Leslie left - EP YELLOW YELLOW, PINK PINK - Out now!',
     author: 'Leslie Left',
   },
   plugins: [
@@ -51,7 +51,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Leslie left - EP RUNNING FROM THE RED ROOM - Out now!',
+        name: 'Leslie left - EP YELLOW YELLOW, PINK PINK - Out now!',
         short_name: 'Leslie Left',
         start_url: '/',
         background_color: '#FFFF00',

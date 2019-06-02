@@ -98,7 +98,8 @@ class Player extends Component {
 
     return (
       <Container>
-        <Tracks>
+        <span>Music player placeholder</span>
+        {/* <Tracks>
           <Track>Its personal</Track>
           <Track active>Come on</Track>
           <Track>I do</Track>
@@ -123,7 +124,7 @@ class Player extends Component {
           </Control>
         </Controls>
 
-        <SeekBar visible={showSeekBar} />
+        <SeekBar visible={showSeekBar} /> */}
 
       </Container>
     );

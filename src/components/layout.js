@@ -9,7 +9,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: ${props => (props.fullHeight ? '100%' : 'auto')};
+`;
+
+const MaxWidthWrapper = styled.div`
   max-width: ${props => (props.maxWidth ? '1600px;' : 'auto')};
+  height: 100%;
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -42,18 +47,20 @@ const Layout = ({
   `).site;
 
   return (
-    <Container className={className} fullHeight={fullHeight} maxWidth={maxWidth}>
-      { showHeader && (
-        <Header>Header | {siteMetadata.title}</Header>
-      ) }
+    <Container className={className} fullHeight={fullHeight}>
+      <MaxWidthWrapper maxWidth={maxWidth}>
+        { showHeader && (
+          <Header>Header | {siteMetadata.title}</Header>
+        ) }
 
-      <Content fullHeight={fullHeight}>
-        {children}
-      </Content>
+        <Content fullHeight={fullHeight}>
+          {children}
+        </Content>
 
-      { showFooter && (
-        <Footer>Footer</Footer>
-      ) }
+        { showFooter && (
+          <Footer>Footer</Footer>
+        ) }
+      </MaxWidthWrapper>
     </Container>
   );
 };

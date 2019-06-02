@@ -76,8 +76,7 @@ const TextContainer = styled.div`
 
   @media (min-width: ${MQ_LAPTOP}px) {
     grid-row-start: 2;
-    // justify-self: flex-start;
-    // max-width: 400px;
+    align-items: flex-start;
   }
 `;
 
