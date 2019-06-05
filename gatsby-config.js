@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Leslie Left',
-    description: 'EP YELLOW YELLOW, PINK PINK - Out now!',
+    description: 'EP Come on - Out now!',
     author: 'Leslie Left',
   },
   plugins: [

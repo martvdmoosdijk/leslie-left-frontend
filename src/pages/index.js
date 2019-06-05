@@ -7,7 +7,6 @@ import {
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Logo from '../components/logo';
-import Player from '../components/player';
 import PromoVideo from '../components/promo-video';
 
 const StyledLayout = styled(Layout)`
@@ -42,21 +41,6 @@ const Container = styled.div`
     max-width: inherit;
   }
 
-`;
-
-const Hamburger = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 40px;
-  cursor: pointer;
-  padding: inherit;
-  z-index: 2;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    left: 0;
-    right: auto;
-  }
 `;
 
 const LogoContainer = styled.div`
@@ -139,8 +123,6 @@ class IndexPage extends Component {
       <StyledLayout showFooter>
         <SEO title="Home" />
 
-        {/* <Hamburger>Menu placeholder</Hamburger> */}
-
         <Container ref={this.container}>
           <LogoContainer>
             <Logo />
@@ -148,11 +130,10 @@ class IndexPage extends Component {
 
           <TextContainer>
             <Title className="title">Leslie Left</Title>
-            <SubTitle>Yellow yellow, pink pink - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">OUT NOW!</AlbumLink></SubTitle>
+            <SubTitle>EP: Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">OUT NOW!</AlbumLink></SubTitle>
           </TextContainer>
 
           <PlayerContainer>
-            {/* <Player /> */}
             <PromoVideo embedCode="NpEaa2P7qZI" />
           </PlayerContainer>
         </Container>
