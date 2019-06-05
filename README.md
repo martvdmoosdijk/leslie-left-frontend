@@ -1,6 +1,8 @@
 # Leslie Left Frontend
 
-This is a static site, build using gatsby, for my band called Leslie Left.
+The official website for my band, Leslie Left.
+
+This is a static site, build using gatsby.
 
 ### Setup
 
@@ -9,8 +11,16 @@ This is a static site, build using gatsby, for my band called Leslie Left.
 ### Commands
 
 * `npm run develop` - Runs a development server with the site on localhost
+* `npm run develop-mobile` - Runs a development server with the site on localhost, accessable through ip on local network
 * `npm run start` - Alias for npm run development
 * `npm run build` - Builds the site into /public
 * `npm run serve` - Server the /public folder
-* `npm run build-for-github-pages` - Builds the site and copies it to the /docs folder to expose it to github pages
+* `npm run serve-mobile` - Server the /public folder, accessable through ip on local network
 
+### Deploy
+
+* `npm run deploy` - Builds the site and saves it in gh-pages branch. Using github pages this site is exposed.
+
+### Favicons
+
+* Generated using [realfavicongenerator](https://realfavicongenerator.net/favicon_result?file_id=p1e01marjj11nrjue37rj1la806)

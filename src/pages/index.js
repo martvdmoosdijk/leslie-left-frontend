@@ -1,145 +1,93 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import anime from 'animejs/lib/anime.es';
 
-import {
-  YELLOW, PINK, MQ_TABLET, MQ_LAPTOP,
-} from '../styles/variables';
-import Layout from '../components/layout';
+import { PRIMARY_COLOR, TABLET_BP } from '../styles/variables';
 import SEO from '../components/seo';
-import Logo from '../components/logo';
-import PromoVideo from '../components/promo-video';
+import Hero from '../components/hero';
+import SocialIcons from '../components/social-icons';
+import Footer from '../components/footer';
+import VideoSection from '../components/video-section';
+import AboutSection from '../components/about-section';
+import MusicSection from '../components/music-section';
+import TourSection from '../components/tour-section';
+import PhotosSection from '../components/photos-section';
+import ComeOnEp from '../images/come-on-ep-cover.png';
 
-const StyledLayout = styled(Layout)`
-  background-color: ${YELLOW};
-`;
-
-const Container = styled.div`
-  width: 100%;
+const Page = styled.div`
   height: 100%;
-  position: relative;
+  background-color: #121212;
+  color: ${PRIMARY_COLOR};
 
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 40% auto 1fr;
-  justify-items: center;
-  align-items: center;
   opacity: 0;
-
-  max-width: 520px;
-  max-height: 800px;
-  margin: auto;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-template-columns: 50% 50%;
-    grid-template-rows: auto 1fr;
-    max-width: inherit;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 0.3fr auto 1fr 0.3fr;
-    max-width: inherit;
-  }
-
 `;
 
-const LogoContainer = styled.div`
-  width: 100%;  
-  height: 100%;
+const StyledSocialIcons = styled(SocialIcons)`
+  margin: 0 auto 20px auto;
+  max-width: 320px;
 
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-row: 1 / span 2;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-row: 1 / span 4;
+  @media (min-width: ${TABLET_BP}px) {
+    margin: 0 auto 30px auto;
   }
 `;
 
-const TextContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-row-start: 1;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-row-start: 2;
-    align-items: flex-start;
-  }
-`;
-
-const Title = styled.h1`
-  text-align: center;
-`;
-
-const SubTitle = styled.h3`
-  text-align: center;
-`;
-
-const AlbumLink = styled.a`
-  color: ${PINK};
-  text-decoration: underline;
-`;
-
-const PlayerContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-row-start: 2;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-row-start: 3;
-  }
-`;
-
-class IndexPage extends Component {
+class Homepage extends Component {
   constructor(props) {
     super(props);
 
-    this.container = React.createRef();
+    this.page = React.createRef();
+    this.hero = React.createRef();
   }
 
   componentDidMount() {
-    this.container.current.style.opacity = 1;
+    this.introAnim();
+    this.hero.current.prepareIntroAnim();
+    setTimeout(() => this.hero.current.introAnim(), 800);
+  }
+
+  introAnim() {
+    anime({
+      targets: this.page.current,
+      duration: 2000,
+      easing: 'easeInOutExpo',
+      opacity: [0, 1],
+    });
   }
 
   render() {
     return (
-      <StyledLayout showFooter>
-        <SEO title="Home" />
+      <Page ref={this.page}>
+        <SEO />
 
-        <Container ref={this.container}>
-          <LogoContainer>
-            <Logo />
-          </LogoContainer>
+        <Hero ref={this.hero} />
 
-          <TextContainer>
-            <Title className="title">Leslie Left</Title>
-            <SubTitle>EP: Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">OUT NOW!</AlbumLink></SubTitle>
-          </TextContainer>
+        <VideoSection title="Come on" embedCode="9LgS91uSi2I" />
+        <AboutSection anchor="about" />
+        <MusicSection
+          anchor="music"
+          music={[
+            { name: 'Come on', image: ComeOnEp, link: 'https://open.spotify.com/track/3TmEPTCRZtCNHkKd1RKyl7' },
+            { name: 'It\'s Personal', image: ComeOnEp, link: 'https://open.spotify.com/track/4H8oaEc4zrR15Ub0peiPOF' },
+            { name: 'I Do', image: ComeOnEp, link: 'https://open.spotify.com/track/20LVI1ZvJVXu15It8ewANK' },
+          ]}
+        />
+        <TourSection
+          anchor="tour"
+          tours={[
+            { date: '1 April 2020', venue: 'Snotty Seaside', location: 'Stockholm, Sweden' },
+            {
+              date: '19 June 2019', venue: 'Ö2', location: 'Stockholm, Sweden', isPast: true,
+            },
+          ]}
+        />
+        <PhotosSection />
 
-          <PlayerContainer>
-            <PromoVideo embedCode="NpEaa2P7qZI" />
-          </PlayerContainer>
-        </Container>
-      </StyledLayout>
+        <StyledSocialIcons />
+        <Footer />
+
+      </Page>
     );
   }
 }
 
-export default IndexPage;
+export default Homepage;

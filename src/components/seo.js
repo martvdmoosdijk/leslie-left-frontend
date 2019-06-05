@@ -1,14 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-const SEO = ({
-  description,
-  lang,
-  meta,
-  title,
-}) => {
+const SEO = () => {
   const { siteMetadata } = useStaticQuery(
     graphql`
         query {
@@ -23,62 +17,37 @@ const SEO = ({
       `,
   ).site;
 
-  const metaDescription = description || siteMetadata.description;
+  const metaDescription = siteMetadata.description;
 
   return (
-    <Helmet
-      htmlAttributes={{ lang }}
-      title={title}
-      titleTemplate={`%s | ${siteMetadata.title}`}
-      meta={[
-        {
-          name: 'description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:title',
-          content: title,
-        },
-        {
-          property: 'og:description',
-          content: metaDescription,
-        },
-        {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary',
-        },
-        {
-          name: 'twitter:creator',
-          content: siteMetadata.author,
-        },
-        {
-          name: 'twitter:title',
-          content: title,
-        },
-        {
-          name: 'twitter:description',
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <Helmet titleTemplate="%s">
+      <html lang="en" />
+      <title>{siteMetadata.title}</title>
+      <meta name="description" content={metaDescription} />
+      <meta name="msapplication-TileColor" content="#00aba9" />
+      <meta name="theme-color" content="#ffffff" />
+
+      <meta property="og:title" content={siteMetadata.title} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:type" content="website" />
+      {/* <meta property="og:image" content={albumCover} /> */}
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content={siteMetadata.author} />
+      <meta name="twitter:title" content={siteMetadata.title} />
+      <meta name="twitter:description" content={metaDescription} />
+
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=lk2RMxd56B" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=lk2RMxd56B" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=lk2RMxd56B" />
+      <link rel="manifest" href="/site.webmanifest?v=lk2RMxd56B" />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg?v=lk2RMxd56B" color="#000000" />
+      <link rel="shortcut icon" href="/favicon.ico?v=lk2RMxd56B" />
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" />
+
+    </Helmet>
   );
-};
-
-SEO.defaultProps = {
-  lang: 'en',
-  meta: [],
-  description: '',
-};
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 };
 
 export default SEO;

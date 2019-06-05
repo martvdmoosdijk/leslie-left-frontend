@@ -12,39 +12,34 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "develop-mobile": "gatsby develop -H 0.0.0.0 -p 8000",
     "start": "npm run develop",
     "serve": "gatsby serve",
+    "serve-mobile": "gatsby serve -H 0.0.0.0 -p 9000",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "build-for-github-pages": "rm -rf .cache && rm -rf public && rm -rf docs && npm run build && cp -R public docs"
+    "deploy": "rm -rf .cache && rm -rf public && rm -rf docs && gatsby build && echo www.leslieleft.com > public/CNAME && gh-pages -d public"
   },
   "dependencies": {
-    "@tweenjs/tween.js": "17.3.0",
-    "babel-plugin-styled-components": "1.10.0",
-    "gatsby": "2.6.0",
-    "gatsby-image": "2.1.0",
-    "gatsby-plugin-manifest": "2.1.1",
-    "gatsby-plugin-offline": "2.1.1",
-    "gatsby-plugin-prefetch-google-fonts": "1.4.2",
-    "gatsby-plugin-react-helmet": "3.0.12",
-    "gatsby-plugin-sharp": "2.0.37",
-    "gatsby-plugin-styled-components": "3.0.7",
-    "gatsby-plugin-web-font-loader": "1.0.4",
-    "gatsby-source-filesystem": "2.0.37",
-    "gatsby-transformer-sharp": "2.1.19",
-    "node-sass": "4.12.0",
-    "prop-types": "15.7.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-helmet": "5.2.1",
-    "styled-components": "4.2.0",
-    "three": "0.104.0",
-    "three-orbitcontrols": "2.102.1"
+    "animejs": "^3.1.0",
+    "babel-plugin-styled-components": "^1.10.6",
+    "gatsby": "^2.17.10",
+    "gatsby-plugin-google-analytics": "^2.1.24",
+    "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
+    "gatsby-plugin-react-helmet": "^3.1.13",
+    "gatsby-plugin-styled-components": "^3.1.11",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-div-100vh": "^0.3.8",
+    "react-dom": "^16.11.0",
+    "react-helmet": "^5.2.1",
+    "styled-components": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "5.3.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.11.0"
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "gh-pages": "^2.1.1"
   }
 }
