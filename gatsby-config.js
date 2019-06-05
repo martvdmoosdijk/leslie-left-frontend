@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/leslie-left-frontend',
   siteMetadata: {
     title: 'Leslie Left',
     description: 'EP Come on - Out now!',

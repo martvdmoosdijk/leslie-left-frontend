@@ -14,3 +14,7 @@ This is a static site, build using gatsby, for my band called Leslie Left.
 * `npm run serve` - Server the /public folder
 * `npm run build-for-github-pages` - Builds the site and copies it to the /docs folder to expose it to github pages
 
+### Extra info
+
+* [Using github pages with Gatsby](https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages/)
+
