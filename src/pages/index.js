@@ -130,7 +130,7 @@ class IndexPage extends Component {
 
           <TextContainer>
             <Title className="title">Leslie Left</Title>
-            <SubTitle>EP: Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">OUT NOW!</AlbumLink></SubTitle>
+            <SubTitle>Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">EP OUT NOW!</AlbumLink></SubTitle>
           </TextContainer>
 
           <PlayerContainer>

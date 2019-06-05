@@ -18,3 +18,12 @@ This is a static site, build using gatsby, for my band called Leslie Left.
 
 * [Using github pages with Gatsby](https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages/)
 
+### Backlog
+
+* GoDaddy Domain name (email?)
+* Remove surge
+* Disable logo movement
+* Favicon
+* Increase size and connect social icons
+* Resizability
+* in-Animations
