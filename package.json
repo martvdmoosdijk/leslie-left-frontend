@@ -12,10 +12,10 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "build-for-github-pages": "rm -rf .cache && rm -rf public && rm -rf docs && npm run build && cp -R public docs"
   },
   "dependencies": {
     "@tweenjs/tween.js": "17.3.0",
