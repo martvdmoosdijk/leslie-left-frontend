@@ -32,7 +32,7 @@ export default ({ title, embedCode }) => (
       <YoutubeFrame
         title="Promo Video"
         type="text/html"
-        src={`http://www.youtube.com/embed/${embedCode}?modestbranding=1`}
+        src={`https://www.youtube.com/embed/${embedCode}?modestbranding=1`}
         frameBorder="0"
         allowFullScreen
       />
