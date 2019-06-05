@@ -1,6 +1,7 @@
 {
   "name": "leslie-left-frontend",
   "private": true,
+  "homepage": "https://martvdmoosdijk.github.io/leslie-left-frontend",
   "description": "The main website for the band called Leslie Left",
   "version": "1.0.0",
   "author": "Mart van de Moosdijk martvandemoosdijk@gmail.com>",
