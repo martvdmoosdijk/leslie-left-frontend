@@ -15,7 +15,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "build-for-github-pages": "rm -rf .cache && rm -rf public && rm -rf docs && npm run build && cp -R public docs"
+    "build-for-github-pages": "rm -rf .cache && rm -rf public && rm -rf docs && npm run build && gh-pages -d public"
   },
   "dependencies": {
     "@tweenjs/tween.js": "17.3.0",
@@ -45,6 +45,7 @@
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.11.0"
+    "eslint-plugin-react": "7.11.0",
+    "gh-pages": "2.0.1"
   }
 }
