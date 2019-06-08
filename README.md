@@ -12,16 +12,13 @@ This is a static site, build using gatsby, for my band called Leslie Left.
 * `npm run start` - Alias for npm run development
 * `npm run build` - Builds the site into /public
 * `npm run serve` - Server the /public folder
-* `npm run build-for-github-pages` - Builds the site and copies it to the /docs folder to expose it to github pages
 
-### Extra info
+### Deploy
 
-* [Using github pages with Gatsby](https://www.gatsbyjs.org/docs/how-gatsby-works-with-github-pages/)
+* `npm run deploy` - Builds the site and saves it in gh-pages branch. Using github pages this site is exposed.
 
 ### Backlog
 
-* GoDaddy Domain name (email?)
-* Remove surge
 * Disable logo movement
 * Favicon
 * Increase size and connect social icons
