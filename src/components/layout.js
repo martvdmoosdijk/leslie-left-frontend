@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import '../styles/global.css';
 import Footer from './footer';
-import { MQ_LAPTOP } from '../styles/variables';
+import { MQ_PHABLET, MQ_TABLET, MQ_LAPTOP } from '../styles/variables';
 
 const Container = styled.div`
   display: flex;
@@ -28,6 +28,16 @@ const Content = styled.div`
   flex-direction: column;
   height: ${props => (props.fullHeight ? '100%' : 'auto')};
   padding: 20px;
+
+  @media (min-width: ${MQ_PHABLET}px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media (min-width: ${MQ_TABLET}px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 
   @media (min-width: ${MQ_LAPTOP}px) {
     padding: 40px;

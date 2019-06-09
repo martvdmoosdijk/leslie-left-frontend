@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import {
-  YELLOW, PINK, MQ_TABLET, MQ_LAPTOP,
-} from '../styles/variables';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Logo from '../components/logo';
 import PromoVideo from '../components/promo-video';
+import { YELLOW, PINK } from '../styles/variables';
 
 const StyledLayout = styled(Layout)`
   background-color: ${YELLOW};
@@ -16,61 +14,35 @@ const StyledLayout = styled(Layout)`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  position: relative;
 
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 1fr;
   grid-template-rows: 40% auto 1fr;
-  justify-items: center;
-  align-items: center;
-  opacity: 0;
 
-  max-width: 520px;
-  max-height: 800px;
   margin: auto;
+  max-width: 800px;
 
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-template-columns: 50% 50%;
+  @media (orientation: landscape) {
+    grid-template-columns: 50% 1fr;
     grid-template-rows: auto 1fr;
-    max-width: inherit;
+    max-width: 1300px;
+    max-height: 600px;
   }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 0.3fr auto 1fr 0.3fr;
-    max-width: inherit;
-  }
-
 `;
 
 const LogoContainer = styled.div`
-  width: 100%;  
-  height: 100%;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
+  @media (orientation: landscape) {
     grid-row: 1 / span 2;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-row: 1 / span 4;
   }
 `;
 
-const TextContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+const TitleContainer = styled.div`
+  display: flex;  
+  justify-content: center;
   align-items: center;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-row-start: 1;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-row-start: 2;
+  flex-direction: column;
+  
+  @media (orientation: landscape) {
     align-items: flex-start;
   }
 `;
@@ -89,33 +61,17 @@ const AlbumLink = styled.a`
 `;
 
 const PlayerContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
+  display: flex;  
   justify-content: center;
   align-items: center;
-  position: relative;
-
-  @media (max-width: ${MQ_TABLET}px) and (orientation: landscape) {
-    grid-row-start: 2;
-  }
-
-  @media (min-width: ${MQ_LAPTOP}px) {
-    grid-row-start: 3;
-  }
+  flex-direction: column;
 `;
 
-class IndexPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.container = React.createRef();
-  }
-
+export default class IndexPage extends Component {
   componentDidMount() {
-    this.container.current.style.opacity = 1;
+    window.addEventListener('resize', () => {
+      // console.log(window.innerWidth / window.innerHeight);
+    });
   }
 
   render() {
@@ -123,15 +79,15 @@ class IndexPage extends Component {
       <StyledLayout showFooter>
         <SEO title="Home" />
 
-        <Container ref={this.container}>
+        <Container>
           <LogoContainer>
             <Logo />
           </LogoContainer>
 
-          <TextContainer>
+          <TitleContainer>
             <Title className="title">Leslie Left</Title>
             <SubTitle>Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">EP OUT NOW!</AlbumLink></SubTitle>
-          </TextContainer>
+          </TitleContainer>
 
           <PlayerContainer>
             <PromoVideo embedCode="NpEaa2P7qZI" />
@@ -141,5 +97,3 @@ class IndexPage extends Component {
     );
   }
 }
-
-export default IndexPage;
