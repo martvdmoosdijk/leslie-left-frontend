@@ -8,6 +8,10 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 class Logo extends Component {
@@ -19,8 +23,7 @@ class Logo extends Component {
 
   componentDidMount() {
     this.setupScene(this.container.current);
-    this.updateSceneSize();
-    this.sceneFramePassed();
+    this.renderFrame();
 
     Object.keys(this.cubes).forEach((x) => {
       Object.keys(this.cubes[x]).forEach((z) => {
@@ -36,13 +39,10 @@ class Logo extends Component {
   }
 
   setupScene(container) {
-    const width = container.offsetWidth;
-    const height = container.offsetHeight;
-
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xFFFF00);
 
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
     camera.position.x = 7;
     camera.position.y = 13;
     camera.position.z = 14;
@@ -54,8 +54,6 @@ class Logo extends Component {
     scene.add(directionalLight);
 
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -84,12 +82,6 @@ class Logo extends Component {
         cube.position.x = x;
         cube.position.z = z;
         cube.scale.y = 0.01;
-        // cube.scale.y = 1;
-
-        // Create edges
-        // const edgesGeometry = new THREE.EdgesGeometry(cube.geometry);
-        // const edgesLines = new THREE.LineSegments(edgesGeometry, new THREE.LineBasicMaterial({ color: 0x000000 }));
-        // cube.add(edgesLines);
 
         cubes[x][z] = { el: cube };
       }
@@ -100,8 +92,8 @@ class Logo extends Component {
     this.camera = camera;
     this.renderer = renderer;
     this.controls = controls;
-    this.initialWidth = width;
 
+    this.updateSceneSize();
     this.renderScene();
   }
 
@@ -114,22 +106,29 @@ class Logo extends Component {
   }
 
   updateSceneSize() {
-    const width = this.container.current.offsetWidth;
-    const height = this.container.current.offsetHeight;
+    const size = Math.min(
+      this.container.current.offsetWidth,
+      this.container.current.offsetHeight,
+    );
 
-    this.camera.aspect = width / height;
-    this.camera.zoom = this.camera.aspect + 0.1;
+    this.camera.aspect = 1;
+    this.camera.zoom = 1.23;
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize(width, height);
+    this.renderer.setSize(size, size);
     this.renderer.render(this.scene, this.camera);
     this.renderer.setPixelRatio(window.devicePixelRatio);
   }
 
-  sceneFramePassed() {
+  renderFrame() {
     // TODO: Only call this function when atually needed
-    requestAnimationFrame(this.sceneFramePassed.bind(this));
-    this.controls.update();
+    if (process.env.NODE_ENV === 'development') {
+      setTimeout(() => {
+        requestAnimationFrame(this.renderFrame.bind(this));
+      }, 500);
+    } else {
+      requestAnimationFrame(this.renderFrame.bind(this));
+    }
     TWEEN.update();
     this.renderScene();
   }
