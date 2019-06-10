@@ -19,6 +19,7 @@ class Logo extends Component {
     super(props);
 
     this.container = React.createRef();
+    this.scaleCube = this.scaleCube.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +28,8 @@ class Logo extends Component {
 
     Object.keys(this.cubes).forEach((x) => {
       Object.keys(this.cubes[x]).forEach((z) => {
-        this.scaleCube(this.cubes[x][z].el, 2000 + Math.random() * 1000);
+        // this.scaleCube(this.cubes[x][z].el, 2000 + Math.random() * 1000);
+        this.scaleCube(this.cubes[x][z].el, 0, 0.0001);
       });
     });
 
@@ -57,15 +59,16 @@ class Logo extends Component {
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = false;
-    controls.enablePan = false;
+    controls.enableZoom = true;
+    controls.enablePan = true;
 
     const cubes = {};
     for (let x = -4; x <= 4; x++) {
       cubes[x] = {};
 
       for (let z = -4; z <= 4; z++) {
-        const cubeHeight = (Math.random() * 3.8) + 0.2; // Min 0.2, max 4
+        // const cubeHeight = (Math.random() * 3.8) + 0.2; // Min 0.2, max 4
+        const cubeHeight = 4;
 
         const geometry = new THREE.BoxGeometry(1, cubeHeight, 1);
         geometry.translate(0, cubeHeight / 2, 0); // Scale from origin
@@ -81,7 +84,7 @@ class Logo extends Component {
 
         cube.position.x = x;
         cube.position.z = z;
-        cube.scale.y = 0.01;
+        cube.scale.y = 1;
 
         cubes[x][z] = { el: cube };
       }
@@ -97,10 +100,10 @@ class Logo extends Component {
     this.renderScene();
   }
 
-  scaleCube(cube, time) {
+  scaleCube(cube, time, toY = 1) {
     new TWEEN.Tween(cube.scale)
-      .to({ y: 1 }, time)
-      .easing(TWEEN.Easing.Elastic.Out)
+      .to({ y: toY }, time)
+      // .easing(TWEEN.Easing.Elastic.Out)
       // .onUpdate(this.renderScene)
       .start();
   }
@@ -122,13 +125,13 @@ class Logo extends Component {
 
   renderFrame() {
     // TODO: Only call this function when atually needed
-    if (process.env.NODE_ENV === 'development') {
-      setTimeout(() => {
-        requestAnimationFrame(this.renderFrame.bind(this));
-      }, 500);
-    } else {
-      requestAnimationFrame(this.renderFrame.bind(this));
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   setTimeout(() => {
+    //     requestAnimationFrame(this.renderFrame.bind(this));
+    //   }, 500);
+    // } else {
+    requestAnimationFrame(this.renderFrame.bind(this));
+    // }
     TWEEN.update();
     this.renderScene();
   }
