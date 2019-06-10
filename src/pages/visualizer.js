@@ -28,6 +28,22 @@ const Title = styled.h1`
 const SubTitle = styled.h3`
 `;
 
+const SixteenByNineBox = styled.div`
+  position: fixed;
+  top: 1%;
+  left: 5%;
+  width: 87%;
+  height: 100%;
+
+  :before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 56.25%;
+    border: 1px solid black;
+  }
+`;
+
 export default class Visualizer extends Component {
   constructor(props) {
     super(props);
@@ -118,6 +134,8 @@ export default class Visualizer extends Component {
           <Title className="title">Leslie Left</Title>
           <SubTitle>EP / Come on - OUT SOON!</SubTitle>
         </TitleContainer>
+
+        <SixteenByNineBox />
 
       </Container>
     );
