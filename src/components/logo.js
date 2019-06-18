@@ -12,6 +12,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  // zoom: 500%;
+  // overflow: visible;
+  // transform: translateY(10px);
 `;
 
 class Logo extends Component {

@@ -20,6 +20,7 @@ This is a static site, build using gatsby, for my band called Leslie Left.
 ### Backlog
 
 * Google Analytics
-* Favicon
+* Inrease size of logo, decreae site of title and video
 * Increase size and connect social icons
 * in-Animations
+* Logo animation
