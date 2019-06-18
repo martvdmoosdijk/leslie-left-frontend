@@ -20,10 +20,12 @@ html, body, p, h1, h2, h3, h4, h5 {
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
+  color: black;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: 'Righteous', cursive;
+  color: black;
 }
 
 h1.title {

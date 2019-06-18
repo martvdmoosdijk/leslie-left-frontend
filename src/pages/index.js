@@ -86,7 +86,8 @@ export default class IndexPage extends Component {
 
           <TitleContainer>
             <Title className="title">Leslie Left</Title>
-            <SubTitle>Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">EP OUT NOW!</AlbumLink></SubTitle>
+            {/* <SubTitle>Come on - <AlbumLink href="https://open.spotify.com/artist" target="_blank" rel="noopener noreferrer">EP OUT NOW!</AlbumLink></SubTitle> */}
+            <SubTitle>Come on - EP out soon!</SubTitle>
           </TitleContainer>
 
           <PlayerContainer>
