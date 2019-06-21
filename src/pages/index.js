@@ -77,7 +77,7 @@ export default class IndexPage extends Component {
   render() {
     return (
       <StyledLayout showFooter>
-        <SEO title="Home" />
+        <SEO />
 
         <Container>
           <LogoContainer>

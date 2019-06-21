@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
+import albumCover from '../images/album-cover.png';
 import favicon from '../images/favicon.ico';
 import favicon16 from '../images/favicon-16x16.png';
 import favicon32 from '../images/favicon-32x32.png';
@@ -34,8 +35,9 @@ const SEO = ({
   return (
     <Helmet
       htmlAttributes={{ lang }}
-      title={title}
-      titleTemplate={`%s | ${siteMetadata.title}`}
+      title={siteMetadata.title}
+      // title={title}
+      // titleTemplate={`%s | ${siteMetadata.title}`}
       meta={[
         {
           name: 'description',
@@ -52,6 +54,10 @@ const SEO = ({
         {
           property: 'og:type',
           content: 'website',
+        },
+        {
+          property: 'og:image',
+          content: albumCover,
         },
         {
           name: 'twitter:card',
@@ -100,7 +106,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   link: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  // title: PropTypes.string.isRequired,
 };
 
 export default SEO;
