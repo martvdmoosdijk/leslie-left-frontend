@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MQ_TABLET } from '../styles/variables';
 
 const Footer = styled.footer`
   display: flex;
@@ -9,9 +10,14 @@ const Footer = styled.footer`
   padding-bottom: 10px;
   height: 35px;
   width: 100%;
+  z-index: 1;
 
   a {
     height: 100%;
+  }
+
+  @media (orientation: landscape) and (min-height: ${MQ_TABLET}px) {
+    height: 40px;
   }
 `;
 

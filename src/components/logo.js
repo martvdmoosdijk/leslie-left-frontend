@@ -5,28 +5,45 @@ import OrbitControls from 'three-orbitcontrols';
 import TWEEN from '@tweenjs/tween.js';
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+
+  transform: translateX(10px) translateY(10px);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  // zoom: 500%;
-  // overflow: visible;
-  // transform: translateY(10px);
+  @media (orientation: landscape) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    transform: translateX(0px) translateY(10px);
+  }
 `;
 
 class Logo extends Component {
   constructor(props) {
     super(props);
 
-    this.container = React.createRef();
+    this.wrapper = React.createRef();
   }
 
   componentDidMount() {
-    this.setupScene(this.container.current);
+    this.setupScene(this.wrapper.current);
     this.renderFrame();
 
     Object.keys(this.cubes).forEach((x) => {
@@ -42,7 +59,7 @@ class Logo extends Component {
     window.removeEventListener('resize', this.updateSceneSize.bind(this));
   }
 
-  setupScene(container) {
+  setupScene(wrapper) {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xFFFF00);
 
@@ -58,7 +75,7 @@ class Logo extends Component {
     scene.add(directionalLight);
 
     const renderer = new THREE.WebGLRenderer();
-    container.appendChild(renderer.domElement);
+    wrapper.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
@@ -111,8 +128,8 @@ class Logo extends Component {
 
   updateSceneSize() {
     const size = Math.min(
-      this.container.current.offsetWidth,
-      this.container.current.offsetHeight,
+      this.wrapper.current.offsetWidth,
+      this.wrapper.current.offsetHeight,
     );
 
     this.camera.aspect = 1;
@@ -143,7 +160,9 @@ class Logo extends Component {
 
   render() {
     return (
-      <Container ref={this.container} />
+      <Container>
+        <Wrapper ref={this.wrapper} />
+      </Container>
     );
   }
 }

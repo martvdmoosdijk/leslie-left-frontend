@@ -8,11 +8,11 @@ const Container = styled.div`
   height: 100%;
   position: relative;
 
-  margin: 20px 0;
+  // margin: 20px 0;
 
-  @media (min-width: ${MQ_TABLET}px) {
-    margin: 40px 0;
-  }
+  // @media (min-width: ${MQ_TABLET}px) {
+  //   margin: 40px 0;
+  // }
 `;
 
 const YoutubeFrame = styled.iframe`
