@@ -16,11 +16,3 @@ This is a static site, build using gatsby, for my band called Leslie Left.
 ### Deploy
 
 * `npm run deploy` - Builds the site and saves it in gh-pages branch. Using github pages this site is exposed.
-
-### Backlog
-
-* Google Analytics
-* Inrease size of logo, decreae site of title and video
-* Increase size and connect social icons
-* in-Animations
-* Logo animation
