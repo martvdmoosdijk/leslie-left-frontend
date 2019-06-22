@@ -13,6 +13,7 @@ const StyledLayout = styled(Layout)`
 `;
 
 const Container = styled.div`
+  opacity: 0;
   width: 100%;
   height: 100%;
 
@@ -78,10 +79,14 @@ const PlayerContainer = styled.div`
 `;
 
 export default class IndexPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.container = React.createRef();
+  }
+
   componentDidMount() {
-    window.addEventListener('resize', () => {
-      // console.log(window.innerWidth / window.innerHeight);
-    });
+    this.container.current.style.opacity = 1;
   }
 
   render() {
@@ -89,7 +94,7 @@ export default class IndexPage extends Component {
       <StyledLayout showFooter>
         <SEO />
 
-        <Container>
+        <Container ref={this.container}>
           <LogoContainer>
             <Logo />
           </LogoContainer>

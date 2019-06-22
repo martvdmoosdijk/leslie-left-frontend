@@ -52,6 +52,12 @@ class Logo extends Component {
       });
     });
 
+    setTimeout(() => {
+      for (let i = 0; i < 20; i++) {
+        this.scaleCubeInfinite();
+      }
+    }, 2000);
+
     window.addEventListener('resize', this.updateSceneSize.bind(this));
   }
 
@@ -102,7 +108,7 @@ class Logo extends Component {
 
         cube.position.x = x;
         cube.position.z = z;
-        cube.scale.y = 0.01;
+        cube.scale.y = 0.00001;
 
         cubes[x][z] = { el: cube };
       }
@@ -123,6 +129,31 @@ class Logo extends Component {
       .to({ y: 1 }, time)
       .easing(TWEEN.Easing.Elastic.Out)
       // .onUpdate(this.renderScene)
+      .start();
+  }
+
+  scaleCubeInfinite() {
+    const x = Math.floor((Math.random() * 9) - 4);
+    const y = Math.floor((Math.random() * 9) - 4);
+    const randCube = this.cubes[x][y];
+
+    if (randCube.isAnimating) {
+      this.scaleCubeInfinite();
+      return;
+    }
+
+    const height = (Math.random() * 0.8) + 0.4;
+    const time = (2000 * Math.random()) + 1000;
+
+    randCube.isAnimating = true;
+
+    new TWEEN.Tween(randCube.el.scale)
+      .easing(TWEEN.Easing.Elastic.Out)
+      .to({ y: height }, time)
+      .onComplete(() => {
+        this.scaleCubeInfinite();
+        randCube.isAnimating = false;
+      })
       .start();
   }
 
