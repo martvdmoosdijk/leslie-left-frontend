@@ -2,7 +2,7 @@ module.exports = {
   pathPrefix: '/leslie-left-frontend',
   siteMetadata: {
     title: 'Leslie Left',
-    description: 'EP Come on - Out now!',
+    description: 'EP Come on - Out now! Stockholm-based Leslie Left is an upcoming indie music group and one of the city’s most exciting bands that you definitely don’t want to miss.',
     author: 'Leslie Left',
   },
   plugins: [
