@@ -105,7 +105,7 @@ export default class IndexPage extends Component {
           </TitleContainer>
 
           <PlayerContainer>
-            <PromoVideo embedCode="GQnehaz1ipQ" />
+            <PromoVideo embedCode="9LgS91uSi2I" />
           </PlayerContainer>
         </Container>
       </StyledLayout>
