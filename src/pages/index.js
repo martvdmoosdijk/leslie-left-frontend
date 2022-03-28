@@ -74,7 +74,8 @@ class Homepage extends Component {
         <TourSection
           anchor="tour"
           tours={[
-            { date: '1 April 2020', venue: 'Snotty Seaside', location: 'Stockholm, Sweden' },
+            { date: '20 May 2022', venue: 'Brother Tuck Bar & Restaurang', location: 'Stockholm, Sweden' },
+            { date: '1 April 2020', venue: 'Snotty Seaside', location: 'Stockholm, Sweden', isPast: true },
             {
               date: '19 June 2019', venue: 'Ö2', location: 'Stockholm, Sweden', isPast: true,
             },

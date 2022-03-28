@@ -15,8 +15,12 @@ const Footer = styled.div`
   }
 `;
 
+function getYear() {
+  return new Date().getFullYear()
+}
+
 export default () => (
   <Footer>
-    © 2020 Leslie Left | Developed by <Link href="https://www.linkedin.com/in/mart-van-de-moosdijk-661023a3/">Mart van de Moosdijk</Link>
+    © { getYear() } Leslie Left | Developed by <Link href="https://www.linkedin.com/in/mart-van-de-moosdijk-661023a3/">Mart van de Moosdijk</Link>
   </Footer>
 );
