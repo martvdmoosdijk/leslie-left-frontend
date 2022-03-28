@@ -14,16 +14,13 @@ module.exports = {
 
     // Preload fonts
     {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          {
-            family: 'Lato',
-          },
-          {
-            family: 'Roboto',
-          },
+          'Lato',
+          'Roboto',
         ],
+        display: 'swap',
       },
     },
 
