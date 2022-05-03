@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 
 import { TABLET_BP } from '../styles/variables';
 import Section from './section';
+import ExternalLink from './external-link';
 
 const MusicWrapper = styled.ul`
   display: grid;
@@ -32,22 +33,24 @@ const MusicItem = styled.li`
   }
 `;
 
-const MusicSection = ({ music, anchor }) => (
-  <Section anchor={anchor}>
-    <h1>Music</h1>
+function MusicSection({ music, anchor }) {
+  return (
+    <Section anchor={anchor}>
+      <h1>Music</h1>
 
-    <MusicWrapper>
-      {music.map((m) => (
-        <a key={m.name} href={m.link} target="_blank" rel="noopener noreferrer" aria-label={m.name}>
-          <MusicItem>
-            <img src={m.image} alt={m.name} />
-            <span>{m.name}</span>
-          </MusicItem>
-        </a>
-      ))}
-    </MusicWrapper>
-  </Section>
-);
+      <MusicWrapper>
+        {music.map((m) => (
+          <ExternalLink key={m.name} href={m.link} desc={m.name}>
+            <MusicItem>
+              <img src={m.image} alt={m.name} />
+              <span>{m.name}</span>
+            </MusicItem>
+          </ExternalLink>
+        ))}
+      </MusicWrapper>
+    </Section>
+  );
+}
 
 MusicSection.defaultProps = {
   anchor: '',

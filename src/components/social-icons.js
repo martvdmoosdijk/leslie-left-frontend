@@ -5,7 +5,7 @@ import {
   TABLET_BP, LAPTOP_BP,
 } from '../styles/variables';
 
-import Link from './external-link';
+import ExternalLink from './external-link';
 import MailIcon from '../svgs/mail';
 import InstagramIcon from '../svgs/instagram';
 import FacebookIcon from '../svgs/facebook';
@@ -40,40 +40,34 @@ const SocialIcons = styled.ul`
 `;
 
 class SocialIconsComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.socialIcons = React.createRef();
-  }
-
   render() {
     const { className, innerRef } = this.props;
 
     return (
       <SocialIcons className={className} ref={innerRef}>
-        <Link href="https://youtube.com/channel/UCO9py8g4_B53XIJaR-zuE0w">
+        <ExternalLink href="https://youtube.com/channel/UCO9py8g4_B53XIJaR-zuE0w">
           <YoutubeIcon />
-        </Link>
+        </ExternalLink>
 
-        <Link href="https://open.spotify.com/artist/3CiEEdYaA6HIBidseYDeBI">
+        <ExternalLink href="https://open.spotify.com/artist/3CiEEdYaA6HIBidseYDeBI">
           <SpotifyIcon />
-        </Link>
+        </ExternalLink>
 
-        <Link href="https://www.facebook.com/leslie.left.sthlm/">
+        <ExternalLink href="https://www.facebook.com/leslie.left.sthlm/">
           <FacebookIcon />
-        </Link>
+        </ExternalLink>
 
-        <Link href="https://twitter.com/leslie_left">
+        <ExternalLink href="https://twitter.com/leslie_left">
           <TwitterIcon />
-        </Link>
+        </ExternalLink>
 
-        <Link href="https://www.instagram.com/leslie.left/">
+        <ExternalLink href="https://www.instagram.com/leslie.left/">
           <InstagramIcon />
-        </Link>
+        </ExternalLink>
 
-        <Link href="mailto:leslieleftmusic@gmail.com">
+        <ExternalLink href="mailto:leslieleftmusic@gmail.com">
           <MailIcon />
-        </Link>
+        </ExternalLink>
       </SocialIcons>
     );
   }

@@ -74,14 +74,25 @@ class Homepage extends Component {
         <TourSection
           anchor="tour"
           tours={[
-            { date: '20 May 2022', venue: 'Brother Tuck Bar & Restaurang', location: 'Stockholm, Sweden' },
-            { date: '1 April 2020', venue: 'Snotty Seaside', location: 'Stockholm, Sweden', isPast: true },
             {
-              date: '19 June 2019', venue: 'Ö2', location: 'Stockholm, Sweden', isPast: true,
+              date: '20 May 2022',
+              venue: 'Brother Tuck Bar & Restaurang',
+              location: 'Stockholm, Sweden',
+              ticketUrl: 'https://www.eventim-light.com/se/a/61568cb803d28e3c37210287/e/6268e2e249cbb267dc98f93a',
+            },
+            {
+              date: '1 April 2020',
+              venue: 'Snotty Seaside',
+              location: 'Stockholm, Sweden',
+            },
+            {
+              date: '19 June 2019',
+              venue: 'Ö2',
+              location: 'Stockholm, Sweden',
             },
           ]}
         />
-        <PhotosSection />
+        {/* <PhotosSection /> */}
 
         <StyledSocialIcons />
         <Footer />

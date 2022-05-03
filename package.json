@@ -17,7 +17,8 @@
     "serve": "gatsby serve",
     "serve-mobile": "gatsby serve -H 0.0.0.0 -p 9000",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
-    "deploy": "rm -rf .cache && rm -rf public && rm -rf docs && gatsby build && echo www.leslieleft.com > public/CNAME && gh-pages -d public"
+    "deploy": "rm -rf .cache && rm -rf public && rm -rf docs && gatsby build && echo www.leslieleft.com > public/CNAME && gh-pages -d public",
+    "deploy-windows": "gatsby build && echo www.leslieleft.com > public/CNAME && gh-pages -d public"
   },
   "dependencies": {
     "animejs": "^3.1.0",

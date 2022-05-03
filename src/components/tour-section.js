@@ -3,9 +3,14 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 
 import { TABLET_BP } from '../styles/variables';
-import Link from './external-link';
+import ExternalLink from './external-link';
 
 import Section from './section';
+import Ticket from '../svgs/ticket';
+
+const StyledSection = styled(Section)`
+  overflow-x: scroll;
+`;
 
 const Table = styled.table`
   width: 100%;
@@ -14,7 +19,7 @@ const Table = styled.table`
   border-collapse: collapse;
 
   td {
-    vertical-align: baseline;
+    // vertical-align: baseline;
   }
 
   tr.past {
@@ -28,18 +33,33 @@ const Column = styled.td`
 `;
 
 const DateColumn = styled(Column)`
-  white-space: nowrap;
   padding-right: 15px;
 `;
 
 const VenueColumn = styled(Column)`
   text-align: left;
-  white-space: nowrap;
   padding-right: 15px;
 `;
 
 const LocationColumn = styled(Column)`
+  text-align: left;
+  padding-right: 15px;
+`;
+
+const TicketColumn = styled(Column)`
   text-align: right;
+`;
+
+const TicketSvg = styled(Ticket)`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 90%;
+  margin-left: auto;
+
+  @media (min-width: ${TABLET_BP}px) {
+    max-width: 70%;
+  }
 `;
 
 const Divider = styled.div`
@@ -78,34 +98,48 @@ const rendeTourTable = (tours) => (
         <DateColumn header>Date</DateColumn>
         <VenueColumn header>Venue</VenueColumn>
         <LocationColumn header>Location</LocationColumn>
+        <TicketColumn header>Tickets</TicketColumn>
       </tr>
       {/* <tr><td colSpan="3"><Divider /></td></tr> */}
 
-      {tours.map((tour) => (
-        <React.Fragment key={tour.date + tour.venue + tour.location}>
-          <tr><td colSpan="3"><Divider /></td></tr>
-          <tr className={tour.isPast ? 'past' : ''}>
-            <DateColumn>{tour.date}</DateColumn>
-            <VenueColumn>{tour.venue}</VenueColumn>
-            <LocationColumn>{tour.location}</LocationColumn>
-          </tr>
-        </React.Fragment>
-      ))}
+      {tours.map((tour) => {
+        const isPast = new Date(tour.date) < new Date();
+
+        return (
+          <React.Fragment key={tour.date + tour.venue + tour.location}>
+            <tr><td colSpan="4"><Divider /></td></tr>
+            <tr className={isPast ? 'past' : ''}>
+              <DateColumn>{tour.date}</DateColumn>
+              <VenueColumn>{tour.venue}</VenueColumn>
+              <LocationColumn>{tour.location}</LocationColumn>
+              {!isPast && tour.ticketUrl && (
+                <TicketColumn>
+                  <ExternalLink href={tour.ticketUrl}>
+                    <TicketSvg />
+                  </ExternalLink>
+                </TicketColumn>
+              )}
+            </tr>
+          </React.Fragment>
+        );
+      })}
 
     </tbody>
   </Table>
 );
 
-const TourSection = ({ tours, anchor }) => (
-  <Section anchor={anchor}>
-    <h1>Tour dates</h1>
-    {tours ? rendeTourTable(tours) : renderNoTours()}
+function TourSection({ tours, anchor }) {
+  return (
+    <StyledSection anchor={anchor}>
+      <h1>Tour dates</h1>
+      {tours ? rendeTourTable(tours) : renderNoTours()}
 
-    <ContactUs>
-      Want us to play live? <Link href="mailto:leslieleftmusic@gmail.com"><u>Contact us!</u></Link>
-    </ContactUs>
-  </Section>
-);
+      <ContactUs>
+        Want us to play live? <ExternalLink href="mailto:leslieleftmusic@gmail.com"><u>Contact us!</u></ExternalLink>
+      </ContactUs>
+    </StyledSection>
+  );
+}
 
 TourSection.defaultProps = {
   anchor: '',
@@ -115,10 +149,11 @@ TourSection.defaultProps = {
 TourSection.propTypes = {
   anchor: propTypes.string,
   tours: propTypes.arrayOf(propTypes.shape({
-    date: propTypes.string,
-    venue: propTypes.string,
-    location: propTypes.string,
-  })),
+    date: propTypes.string.isRequired,
+    venue: propTypes.string.isRequired,
+    location: propTypes.string.isRequired,
+    ticketUrl: propTypes.string,
+  }).isRequired),
 };
 
 export default TourSection;

@@ -14,7 +14,7 @@ const Section = styled(Container)`
     margin-bottom: 30px;
   }
 
-  :first-of-type {
+  &:first-of-type {
     margin-top: 40px;
   }
 
@@ -26,15 +26,17 @@ const Section = styled(Container)`
       margin-bottom: 40px;
     }
 
-    :first-of-type {
+    &:first-of-type {
       margin-top: 80px;
     }
   }
 `;
 
-export default ({ className, children, anchor }) => (
-  <Section className={className}>
-    {anchor ? <Anchor id={anchor} /> : null}
-    {children}
-  </Section>
-);
+export default function ({ className, children, anchor }) {
+  return (
+    <Section className={className}>
+      {anchor ? <Anchor id={anchor} /> : null}
+      {children}
+    </Section>
+  );
+}

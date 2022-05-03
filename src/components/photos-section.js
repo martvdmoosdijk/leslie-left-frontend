@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { TABLET_BP, LAPTOP_BP } from '../styles/variables';
+import ExternalLink from './external-link';
 import Section from './section';
 
 const Photos = styled.div`
@@ -60,6 +61,7 @@ class PhotosSection extends Component {
           instagram: `https://www.instagram.com/p/${e.node.shortcode}/`,
         }));
     } catch (e) {
+      console.log(e);
       console.error(`Unable to retrieve instagram photos. Reason: ${e.toString()}`);
     }
 
@@ -74,9 +76,9 @@ class PhotosSection extends Component {
         <h1>Instagram</h1>
         <Photos>
           {filteredPhotos.map((photo) => (
-            <a key={photo.instagram} href={photo.instagram} target="_blank" rel="noopener noreferrer" aria-label="Leslie Left @ Instagram">
+            <ExternalLink key={photo.instagram} href={photo.instagram} desc="Leslie Left @ Instagram">
               <Photo src={photo.url} alt="Leslie Left instagram" />
-            </a>
+            </ExternalLink>
           ))}
         </Photos>
       </Section>
