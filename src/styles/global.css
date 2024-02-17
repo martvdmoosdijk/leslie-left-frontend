@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Use browser dark mode UI */
+:root {
+  color-scheme: dark;
+}
+
+/* 1rem = 10px and reset default font size to 16px */
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+
+/* Reset default margin/padding */
+html
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
