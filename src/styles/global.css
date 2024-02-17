@@ -5,6 +5,8 @@
 /* Use browser dark mode UI */
 :root {
   color-scheme: dark;
+
+  --z-index-nav-bar: 10;
 }
 
 /* 1rem = 10px and reset default font size to 16px */

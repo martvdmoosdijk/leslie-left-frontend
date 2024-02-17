@@ -1,0 +1,40 @@
+.container {
+  height: 400vh;
+}
+
+.gallery {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border: 1px solid red;
+
+  &__image {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: auto;
+  }
+
+  &__image:nth-child(1) {
+    top: 25vh;
+    left: 40vw;
+  }
+  &__image:nth-child(2) {
+    top: 50vh;
+    left: 30vw;
+  }
+  &__image:nth-child(3) {
+    top: 40vh;
+    left: 70vw;
+  }
+  &__image:nth-child(4) {
+    top: 80vh;
+    left: 45vw;
+  }
+  &__image:nth-child(5) {
+    top: 70vh;
+    left: 80vw;
+  }
+}

@@ -1,12 +1,13 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { Counter } from "~/components/counter/counter";
+import { ScrollingGallery } from "~/components/scrolling-gallery/scrolling-gallery";
 
 export default component$(() => {
   return (
     <>
-      <h1>Home page</h1>
-      <Counter />
+      <div style="height: 101vh;" />
+      <ScrollingGallery />
+      <div style="height: 200vh;" />
     </>
   );
 });
