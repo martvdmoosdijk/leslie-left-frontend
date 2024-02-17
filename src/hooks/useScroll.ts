@@ -25,6 +25,8 @@ export function useScroll(target: Signal<HTMLDivElement | undefined>) {
   useVisibleTask$(({ cleanup }) => {
     if (!target.value) return;
 
+    onScroll()
+
     const observerHandle = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
