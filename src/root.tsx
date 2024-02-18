@@ -8,8 +8,11 @@ import { RouterHead } from "./components/router-head/router-head";
 
 import "./styles/fonts.css";
 import "./styles/global.css";
+import { useSmoothScroll } from "./hooks/useSmoothScroll";
 
 export default component$(() => {
+  useSmoothScroll();
+
   /**
    * The root of a QwikCity site always start with the <QwikCityProvider> component,
    * immediately followed by the document's <head> and <body>.
