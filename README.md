@@ -67,3 +67,9 @@ npm run build # or `yarn build`
 ## Notes
 
 Fonts generated using <https://gwfh.mranftl.com/fonts>
+
+## Static Site Generator (Node.js)
+
+```shell
+npm run build.server
+```
