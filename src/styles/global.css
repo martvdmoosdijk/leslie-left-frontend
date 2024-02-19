@@ -27,3 +27,9 @@ body {
 body {
   font-family: 'Lato', sans-serif;
 }
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

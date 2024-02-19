@@ -3,6 +3,7 @@
 import { type Signal, useSignal, useVisibleTask$, $ } from "@builder.io/qwik";
 
 export function useScroll(target: Signal<HTMLDivElement | undefined>) {
+  const ready = useSignal(false);
   const scrollYProgress = useSignal(0);
 
   const onScroll = $(() => {
@@ -21,7 +22,6 @@ export function useScroll(target: Signal<HTMLDivElement | undefined>) {
     }
   });
 
-  // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ cleanup }) => {
     if (!target.value) return;
 
@@ -34,13 +34,17 @@ export function useScroll(target: Signal<HTMLDivElement | undefined>) {
           window.addEventListener("scroll", onScroll);
           onScroll();
         } else {
+          // TODO: Can be nicer to wait for scroll to be idle, then remove the listener. So we don't get a hard cut
           console.log('<END> Bottom of the target left bottom of the viewport')
           window.removeEventListener("scroll", onScroll);
+          onScroll();
         }
       },
       { rootMargin: '-100% 0px  0px 0px' }
     );
     observerHandle.observe(target.value);
+
+    ready.value = true
 
     cleanup(() => {
       window.removeEventListener("scroll", onScroll);
@@ -49,5 +53,8 @@ export function useScroll(target: Signal<HTMLDivElement | undefined>) {
   })
 
 
-  return { scrollYProgress }
+  return {
+    scrollYProgress,
+    ready,
+  }
 }

@@ -3,92 +3,100 @@ import {
   component$,
   useSignal,
   useStylesScoped$,
+  useComputed$,
 } from "@builder.io/qwik";
 
 import styles from "./scrolling-gallery.scss?inline";
-import ImageComeOneEpCover from "../../images/come-on-ep-cover.png?jsx";
+// import ImageComeOneEpCover from "../../images/come-on-ep-cover.png?jsx";
 import { useScroll } from "~/hooks/useScroll";
 import { useTransform, useTransformAppend } from "~/hooks/useTransform";
-import { signalValue } from "../helpers/signal-value";
+import comeOnEpCover from "../image/come-on-ep-cover";
+import stockImg from "../image/stock-img";
 
 type Image = {
-  component: typeof ImageComeOneEpCover;
-  position: [string | Signal<string>, string | Signal<string>];
-  opacity: number | Signal<number>;
-  scale: number | Signal<number>;
+  component: any;
+  position: [string, string];
+  opacity: Signal<number>;
+  scale: Signal<number>;
 };
 
 export const ScrollingGallery = component$(() => {
   useStylesScoped$(styles);
 
   const rootElement = useSignal<HTMLDivElement>();
-  const { scrollYProgress } = useScroll(rootElement);
+  const { scrollYProgress, ready } = useScroll(rootElement);
   const scale1 = useTransform(scrollYProgress, [0, 1], [1, 6.1]);
   const scale3 = useTransform(scrollYProgress, [0, 1], [1, 5.3]);
-  const scale5 = useTransform(scrollYProgress, [0, 1], [1, 4.5]);
-  const scale9 = useTransform(scrollYProgress, [0, 1], [1, 3.9]);
+  // const scale5 = useTransform(scrollYProgress, [0, 1], [1, 4.5]);
+  // const scale9 = useTransform(scrollYProgress, [0, 1], [1, 3.9]);
 
-  const opacity100 = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const opacity50 = useTransform(scrollYProgress, [0, 1], [0, 0.25]);
+  const opacitySSR = useSignal(0);
+  const opacity100 = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  // const opacity50 = useTransform(scrollYProgress, [0, 1], [0.25, 0]);
   // const moveLeft = useTransformAppend(scrollYProgress, [0, 1], [0, -100], "%");
 
-  const images: Image[] = [
+  const images = useComputed$<Image[]>(() => [
     {
-      component: ImageComeOneEpCover,
+      component: comeOnEpCover,
       position: ["0", "0"],
-      opacity: opacity100,
-      scale: scale9,
-    },
-    {
-      component: ImageComeOneEpCover,
-      position: ["-20vw", "-10vh"],
-      opacity: opacity100,
+      opacity: ready.value ? opacity100 : opacitySSR,
       scale: scale1,
     },
     {
-      component: ImageComeOneEpCover,
-      position: ["0vw", "-20vh"],
-      opacity: opacity50,
-      scale: scale5,
-    },
-    {
-      component: ImageComeOneEpCover,
-      position: ["-10vw", "20vh"],
-      opacity: opacity100,
+      component: stockImg,
+      position: ["-20vw", "-10vh"],
+      opacity: ready.value ? opacity100 : opacitySSR,
       scale: scale3,
     },
-    {
-      component: ImageComeOneEpCover,
-      position: ["30vw", "-5vh"],
-      opacity: opacity100,
-      scale: scale3,
-    },
-    {
-      component: ImageComeOneEpCover,
-      position: ["20vw", "30vh"],
-      opacity: opacity100,
-      scale: scale5,
-    },
-  ];
+    // {
+    //   // component: ImageComeOneEpCover,
+    //   position: ["0vw", "-20vh"],
+    //   opacity: opacity50,
+    //   scale: scale5,
+    // },
+    // {
+    //   // component: ImageComeOneEpCover,
+    //   position: ["-10vw", "20vh"],
+    //   opacity: opacity100,
+    //   scale: scale3,
+    // },
+    // {
+    //   // component: ImageComeOneEpCover,
+    //   position: ["30vw", "-5vh"],
+    //   opacity: opacity100,
+    //   scale: scale3,
+    // },
+    // {
+    //   // component: ImageComeOneEpCover,
+    //   position: ["20vw", "30vh"],
+    //   opacity: opacity100,
+    //   scale: scale5,
+    // },
+  ]);
 
   return (
     <div class="container" ref={rootElement}>
       <div class="gallery">
-        {images.map((img, idx) => (
+        {images.value.map((img, idx) => (
           <div
             class="image-wrapper"
             key={idx}
             style={{
-              transform: `translate(-50%, -50%) scale(${signalValue(img.scale)})`,
+              transform: `translate(-50%, -50%) scale(${img.scale.value})`,
             }}
           >
-            <img.component
+            <div
               class="image"
               style={{
-                transform: `translate(${signalValue(img.position[0])}, ${signalValue(img.position[1])})`,
-                opacity: signalValue(img.opacity),
+                transform: `translate(${img.position[0]}, ${img.position[1]})`,
+                opacity: img.opacity.value,
               }}
-            />
+            >
+              <img.component />
+              {/* <span>Test</span> */}
+              {/* <LocalImage name="come-on-ep-cover" /> */}
+              {/* <LocalImage name="stock-img" /> */}
+            </div>
           </div>
         ))}
       </div>
