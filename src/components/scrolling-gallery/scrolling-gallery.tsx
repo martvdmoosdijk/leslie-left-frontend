@@ -4,7 +4,7 @@ import {
   useSignal,
   useStylesScoped$,
   useComputed$,
-  useTask$,
+  useVisibleTask$,
 } from "@builder.io/qwik";
 
 import { useScroll } from "~/hooks/useScroll";
@@ -23,7 +23,7 @@ export const ScrollingGallery = component$(() => {
   useStylesScoped$(styles);
 
   const containerElement = useSignal<HTMLDivElement>();
-  const galleryElement = useSignal<HTMLDivElement>();
+  const imageElements = useSignal<HTMLDivElement[]>([]);
   const { scrollYProgress, ready } = useScroll(containerElement, {
     start: "top",
     end: "bottom",
@@ -66,15 +66,28 @@ export const ScrollingGallery = component$(() => {
     },
   ]);
 
+  // useVisibleTask$(
+  //   () => {
+  // TODO Staggering animation? It gets reset when scrolling
+  // animate(containerElement.value!, { opacity: 1 }, { duration: 0.5 });
+  // animate(imageElements.value, { opacity: 1 }, { delay: stagger(0.1) });
+  // TODO Can we use the scroll from motion?
+  // https://motion.dev/dom/scroll
+  //   },
+  //   { strategy: "document-ready" }
+  // );
+
   return (
     <div class="container" ref={containerElement}>
-      <div class="gallery" ref={galleryElement}>
+      <div class="gallery">
         {images.value.map((img, idx) => (
           <div
+            ref={(s) => imageElements.value.push(s)}
             class="image-wrapper"
             key={idx}
             style={{
               transform: `translate(-50%, -50%) scale(${img.scale.value})`,
+              opacity: ready.value ? 1 : 0,
             }}
           >
             <div
@@ -84,9 +97,6 @@ export const ScrollingGallery = component$(() => {
               }}
             >
               <img.component />
-              {/* <span>Test</span> */}
-              {/* <LocalImage name="come-on-ep-cover" /> */}
-              {/* <LocalImage name="stock-img" /> */}
             </div>
           </div>
         ))}
