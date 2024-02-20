@@ -1,62 +1,74 @@
-import { type Signal, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import { useVisibleTask$, type Signal, useSignal } from "@builder.io/qwik";
+
+type useScrollOptions = {
+  /** Default: bottom  */
+  start?: 'top' | 'bottom' | number
+  /** Default: bottom  */
+  end?: 'top' | 'bottom' | number
+}
 
 /**
  * Keeps track of the scroll percentage of the target element within the viewport
  */
-export function useScroll(target: Signal<HTMLDivElement | undefined>) {
+export function useScroll(target: Signal<HTMLDivElement | undefined>, options: useScrollOptions = {}) {
   const ready = useSignal(false);
+  const scrollY = useSignal(0);
   const scrollYProgress = useSignal(0);
 
   useVisibleTask$(({ cleanup }) => {
-    if (!target.value) return;
+    if (!target.value) return
 
-    const onScroll = (() => {
-      if (!target.value) return;
+    const updateScrollMetadata = () => {
+      const startOffset = (options.start === undefined || options.start === 'bottom') ?
+        window.innerHeight :
+        options.start === 'top' ? 0 : options.start
 
-      const start = target.value.scrollTop
-      const end = target.value.scrollHeight - target.value.scrollTop;
-      const cur = window.scrollY;
+      const endOffset = (options.end === undefined || options.end === 'bottom') ?
+        window.innerHeight :
+        options.end === 'top' ? 0 : options.end
 
-      if (cur < start) {
-        scrollYProgress.value = 0;
-      } else if (cur > end) {
-        scrollYProgress.value = 1;
-      } else {
-        scrollYProgress.value = (cur - start) / (end - start);
-      }
-    });
+      const startAt = target.value!.offsetTop - startOffset
+      const endAt = target.value!.offsetTop + target.value!.clientHeight - endOffset
+      const maxScrollAmount = endAt - startAt
 
-    const onIntersection = (entry: IntersectionObserverEntry) => {
-      if (entry.isIntersecting) {
-        console.log('<START> Top of the target hitted bottom of the viewport ')
-        window.addEventListener("scroll", onScroll);
-        onScroll();
-      } else {
-        // TODO: Can be nicer to wait for scroll to be idle, then remove the listener. So we don't get a hard cut
-        console.log('<END> Bottom of the target left bottom of the viewport')
-        window.removeEventListener("scroll", onScroll);
-        onScroll();
-      }
+      return { startAt, maxScrollAmount }
     }
 
-    const observerHandle = new IntersectionObserver(
-      ([entry]) => onIntersection(entry),
-      { rootMargin: '-100% 0px  0px 0px' }
-    );
-    observerHandle.observe(target.value);
+    const updateScrollInfo = ({ startAt, maxScrollAmount }: ReturnType<typeof updateScrollMetadata>) => {
+      const curPos = window.scrollY
+      const scrolled = Math.min(maxScrollAmount, Math.max(0, curPos - startAt))
+      const scrolledPercentage = scrolled / maxScrollAmount
 
+      scrollY.value = scrolled
+      scrollYProgress.value = scrolledPercentage
+    };
+
+    const onScroll = () => {
+      updateScrollInfo(scrollMetadata)
+    }
+    const onResize = () => {
+      scrollMetadata = updateScrollMetadata()
+      updateScrollInfo(scrollMetadata)
+    }
+
+    // TODO Performance improvement - RAF
+    // TODO Performance improvement - Single scroll/resize handler
+    let scrollMetadata = updateScrollMetadata()
+    onResize()
     ready.value = true
-    onScroll()
 
+    window.addEventListener("scroll", onScroll);
+    window.addEventListener('resize', onResize);
     cleanup(() => {
-      window.removeEventListener("scroll", onScroll);
-      observerHandle.disconnect()
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener('resize', onResize);
     });
-  })
 
+  }, { strategy: 'document-ready' })
 
   return {
-    scrollYProgress,
     ready,
+    scrollY,
+    scrollYProgress,
   }
 }
