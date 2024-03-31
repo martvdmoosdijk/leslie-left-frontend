@@ -1,35 +1,11 @@
-* {
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Use browser dark mode UI */
-:root {
+body.dark {
   color-scheme: dark;
-
-  --z-index-nav-bar: 10;
-}
-
-/* 1rem = 10px and reset default font size to 16px */
-html {
-  font-size: 62.5%;
-}
-body {
-  font-size: 1.6rem;
-}
-
-/* Reset default margin/padding */
-html
-body {
-  margin: 0;
-  padding: 0;
 }
 
 body {
   font-family: 'Lato', sans-serif;
-}
-
-img {
-  width: 100%;
-  height: auto;
-  display: block;
 }

@@ -1,13 +1,9 @@
-import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 
-import styles from "./nav-bar.scss?inline";
-
 export const NavBar = component$(() => {
-  useStylesScoped$(styles);
-
   return (
-    <nav class="nav-bar">
+    <nav class="fixed z-navbar w-full flex flex-row gap-2 px-4 py-2">
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
     </nav>

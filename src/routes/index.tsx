@@ -5,9 +5,9 @@ import { ScrollingGallery } from "~/components/scrolling-gallery/scrolling-galle
 export default component$(() => {
   return (
     <>
-      {/* <div style="height: 100vh; border: 1px solid green;">100vh</div>
-      <div style="height: 100px; border: 1px solid orange;">100px</div>
-      <div style="height: 100vh; border: 1px solid green;">100vh</div> */}
+      {/* <div style="height: 100vh; border: 1px solid green;">100vh</div> */}
+      <div style="height: 300px; border: 1px solid orange;">100px</div>
+      {/* <div style="height: 100vh; border: 1px solid green;">100vh</div> */}
       {/* <div style="height: 100px; border: 1px solid orange;">100px</div> */}
       <ScrollingGallery />
       {/* <div style="height: 100px; border: 1px solid orange;">100px</div> */}
